@@ -1,0 +1,243 @@
+﻿@model FEKDMETAK.Models.Notification
+
+<h4>Notification</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="notificationForm" action="/Notification/SentNotification" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" required />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" type="datetime-local" required />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clock" class="control-label"></label>
+                <select asp-for="Clock" class="form-control">
+                    @foreach (var clockValue in Enum.GetValues(typeof(FEKDMETAK.Models.Clock)))
+                    {
+                        <option value="@clockValue">@clockValue</option>
+                    }
+                </select>
+                <span asp-validation-for="Clock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmPm" class="control-label"></label>
+                <select asp-for="AmPm" class="form-control">
+                    @foreach (var amPmValue in Enum.GetValues(typeof(FEKDMETAK.Models.AmPm)))
+                    {
+                        <option value="@amPmValue">@amPmValue</option>
+                    }
+                </select>
+                <span asp-validation-for="AmPm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Create" class="btn btn-primary" onclick="sendNotification()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="notification" class="mt-3"></div>
+
+@*@section Scripts {
+*@    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script>
+    function sendNotification() {
+        var form = document.getElementById("notificationForm");
+        var formData = new FormData(form);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                document.getElementById("notification").innerText = "Notification sent successfully";
+            }
+        };
+        xhr.send(formData);
+    }
+</script>
+<script>
+    function sendNotification() {
+        var form = document.getElementById("notificationForm");
+        var formData = new FormData(form);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                document.getElementById("notification").innerText = "Notification sent successfully";
+                // Optionally, you can redirect the user to another page here
+            }
+        };
+        xhr.send(formData);
+    }
+</script>
+<script>
+    function handleAction(action) {
+        var form = document.getElementById("notificationForm");
+        var message = form.elements["Message"].value;
+        var date = new Date(form.elements["Date"].value);
+        var clock = form.elements["Clock"].value;
+        var amPm = form.elements["AmPm"].value;
+
+        // Perform the desired action based on the value and other parameters
+        // For example, you can make an AJAX request to save the values to the server
+
+        // Example AJAX request using Fetch API
+        fetch('/Notification/SentNotification', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: message,
+                date: date.toISOString(),
+                clock: clock,
+                amPm: amPm
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Notification saved successfully");
+                    console.log('Notification saved successfully');
+                } else {
+                    console.error('Error saving notification');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving notification:', error);
+            });
+    }
+</script>
+<style>
+    /* Container and Form Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #e9ecef;
+        color: #333;
+        padding: 20px;
+    }
+
+    h4 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #008374;
+    }
+
+    h4 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #008374;
+    }
+
+    .paragraph-style {
+        font-size: 1.2rem; /* Adjust the font size as needed */
+        font-weight: 500; /* Semi-bold text */
+        color: #008374; /* Text color */
+        text-align: center; /* Center align text */
+        background-color: #e9ecef; /* Light background color */
+        /* padding: 10px 15px;/ / Padding around the text */
+        /border: 1px solid #ddd;
+        / /* Border with light color */
+        /border-radius: 5px;
+        / /* Rounded corners */
+        /* margin: 20px 0;/ / Margin above and below the paragraph */
+        direction: rtl; /* Right-to-left text direction for Arabic */
+        /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);/ / Subtle shadow for depth */
+    }
+
+
+    .row {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .col-md-4 {
+        background-color: #19875426;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"], input[type="datetime-local"], select, .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        box-sizing: border-box;
+    }
+
+    input[type="button"], .btn-primary {
+        background-color: #008374;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        input[type="button"]:hover, .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    #notification {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+        #notification.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        #notification.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+    /*/* Responsive Styles */
+    /*media (max-width: 576px) {
+            .col-md-4 {
+                padding: 15px;
+                width: 90%;
+            }*/ */
+
+    input[type="button"], .btn-primary {
+        width: 100%;
+        padding: 10px;
+    }
+
+    
+</style>
+
+@*}*@

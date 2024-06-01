@@ -1,0 +1,45 @@
+﻿@using FEKDMETAK.Models;
+@model User
+@using Microsoft.AspNetCore.Mvc
+@using System.Xml.Linq;
+<head>
+    <link href="~/css/login(1).css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/js/site.js"></script>
+</head>
+
+
+
+<form asp-controller="Home" asp-action="Login" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @*  <a href="c:\users\original\downloads\c#website\fekdmetak2\fekdmetak2\views\city\create.cshtml">c:\users\original\downloads\c#website\fekdmetak2\fekdmetak2\views\city\create.cshtml</a>*@
+    <h2>تسجيل دخول </h2>
+    <div class="input_box">
+        <input style=  asp-for="email" placeholder="البريد الاليكتروني" />
+        <span style="display:block" asp-validation-for="email"></span>
+    </div>
+    <div class="input_box">
+        <input style="display:block" asp-for="password" type="password" placeholder="الرقم السري" />
+        @*<span style="display:block" asp-validation-for="password"></span>*@
+    </div>
+    <button type="submit" class="button">تسجيل</button>
+ 
+    <form action="~/Home/Index">
+        
+    
+        @if (string.IsNullOrEmpty(@ViewBag.ltld))
+        {
+            <h2>مرحبا</h2>
+           @* <p class="text-muted">مرحبا</p>*@
+
+        }
+        else
+        {
+            <p class="text-muted">مرحبا,اخر وقت تم دخولك للموقع :@ViewBag.ltld</p>
+        }
+    </form>
+</form>
+

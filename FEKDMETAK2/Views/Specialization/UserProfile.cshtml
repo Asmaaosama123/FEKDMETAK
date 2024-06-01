@@ -1,0 +1,300 @@
+﻿@model FEKDMETAK.Models.User
+@{
+    var hasReviewed = ViewBag.HasReviewed as bool? ?? false;
+    var reviewedUserId = ViewBag.ReviewedUserId as int?;
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix today</title>
+    @*   <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">*@
+    <link href="~/css/templatemo-style.css" rel="stylesheet" />
+    <link href="~/css/userprofile.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a363edd0e0.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <font-awesome-icon :icon="['far', 'arrow-up']" />
+    <FontAwesomeIcon icon="fa-duotone fa-arrow-up" />
+    <font-awesome-icon :icon="['fad', 'arrow-up']" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+</head>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">.     </div>
+
+                <div class="card-body">
+                    <div class="user-photo text-center">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo)" alt="User Photo" class="rounded-circle" style="width: 150px; height: 150px;">
+                    </div>
+                    @{
+                        var base64 = Convert.ToBase64String(Model.Photo);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    }
+
+                    <div class="user-box">
+                        <div class="user-details text-center">
+                            <h4>@Model.FName @Model.LName</h4>
+                            @{
+                                var ratingsum = ViewBag.ratingsum;
+                                var ratingcount = ViewBag.ratingcount;
+                                decimal rating = 0;
+                                if (ratingcount > 0)
+                                {
+                                    rating = (ratingsum / ratingcount);
+                                }
+                                var totalrate = decimal.Parse(rating.ToString());
+                            }
+                            @if (ViewBag.check == 1)
+                            {
+
+                                <p>your rate is:</p>
+                                <span class="pull-right">
+                                    @{
+                                        if (ViewBag.rate != null)
+                                        {
+                                            int integerRate = (int)Math.Round(ViewBag.rate);
+                                            for (int i = 0; i < integerRate; i++)
+                                            {
+                                                <i class="fa fa-star fa-2x" style="color: gold;"></i>
+                                            }
+                                        }
+                                    }
+                                </span>
+                                <p>total rate is:</p>
+                                <span class="pull-right">
+                                    @{
+                                        if (ViewBag.total != null)
+                                        {
+                                            int Rate = (int)Math.Round(ViewBag.total);
+                                            for (int i = 0; i < Rate; i++)
+                                            {
+                                                <i class="fa fa-star fa-2x" style="color: gold;"></i>
+
+                                            }
+                                        }
+                                    }
+                                </span>
+                            }
+                            else
+                            {
+                                <partial name="_RatingPartialView" />
+                                <div id="1">
+                                </div>
+                            }
+
+                            <p>البريد الإلكتروني: @Model.email</p>
+                            <p>التخصص: @ViewBag.SpecializationName</p>
+                            <p>  المحافظة:@Model.Town.City.Name </p>
+                            <p>  المركز:@Model.Town.Name </p>
+
+                            <p>العمر: @Model.age</p>
+                            <p>النوع: @Model.Gender</p>
+                            <p>العنوان: @Model.Adderess</p>
+                            <form asp-controller="Notification" asp-action="CreateNotification" method="post">
+                                <input type="hidden" name="SenderId" value="@ViewBag.userId">
+                                <input type="hidden" name="ReceiverId" value="@ViewBag.user">
+                                <button type="submit" class="btn-success" color="background_color green">حجز موعد</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*   @section Scripts {
+    *@        <script>
+
+                  document.addEventListener("DOMContentLoaded", function () {
+                      const stars = document.querySelectorAll('.star');
+                      const ratingCount = document.getElementById('ratingCount');
+
+                      let rating = 0;
+
+                      stars.forEach(star => {
+                          star.addEventListener('click', () => {
+                              const value = parseInt(star.getAttribute('data-value'));
+                              rating = value;
+                              updateStars(value);
+                              sendRating(value);
+                          });
+                      });
+
+
+                      function updateStars(value) {
+                          stars.forEach((star, index) => {
+                              if (index < value) {
+                                  star.classList.add('active');
+                              } else {
+                                  star.classList.remove('active');
+                              }
+                          });
+                          ratingCount.textContent = value;
+                      }
+                      function disableStars() {
+                          stars.forEach(star => {
+                              star.classList.add('disabled');
+                              star.style.pointerEvents = 'none';
+                          });
+                      }
+
+                      function sendRating(value) {
+                          // Send rating to the server using AJAX
+                          $.ajax({
+                              url: '/Specialization/AddReview', // Update with your controller action URL
+                              method: 'POST',
+                              data: { id: @ViewBag.reviewed, rateOfUser: value },
+                              success: function (response) {
+                                  // Update the partial view with the new total rating
+                                  console.log('Rating submitted: ' + value);
+                                  document.getElementById(1).innerHTML = response;
+
+                                  // Disable the stars after successful rating
+                                  hasReviewed = true;
+                                  disableStars();
+                              },
+                              error: function (error) {
+                                  console.error('Error:', error);
+                              }
+                          });
+                      }
+
+                      updateStars(0);
+
+                  });
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var reviewedValue = '@ViewBag.reviewed';
+            $.ajax({
+                url: '/Notification/getvalue', // Replace with the correct URL of the other controller's action
+                method: 'POST',
+                data: { reviewed: reviewedValue },
+                success: function (response) {
+                    console.log('Value sent successfully');
+                    // Handle the success response as needed
+                },
+                error: function (error) {
+                    console.error('Error sending value:', error);
+                    // Handle the error response as needed
+                }
+            });
+        });
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var hasReviewed = @hasReviewed.ToString().ToLower() === 'true';
+            var reviewedUserId = @reviewedUserId;
+
+            if (hasReviewed) {
+                disableStars();
+            }
+
+            function disableStars() {
+                var stars = document.querySelectorAll('.star');
+                stars.forEach(function (star) {
+                    star.style.pointerEvents = 'none';
+                    star.style.color = '#ccc';
+                });
+            }
+
+            document.querySelectorAll('.star').forEach(function (star) {
+                star.addEventListener('click', function () {
+                    if (!hasReviewed) {
+                        var rating = this.getAttribute('data-value');
+                        document.getElementById('ratingCount').innerText = rating;
+                        document.querySelectorAll('.star').forEach(function (s) {
+                            s.classList.remove('active');
+                            if (s.getAttribute('data-value') <= rating) {
+                                s.classList.add('active');
+                            }
+                        });
+
+                        // Submit the rating via AJAX
+                        fetch('@Url.Action("SubmitReview")', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                            },
+                            body: JSON.stringify({
+                                reviewedUserId: reviewedUserId,
+                                rate: rating
+                            })
+                        }).then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    hasReviewed = true;
+                                    disableStars();
+                                } else {
+                                    alert(data.message);
+                                }
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .stars {
+            display: flex;
+            justify-content: center;
+        }
+
+        .star {
+            font-size: 24px;
+            cursor: pointer;
+            color: #ccc;
+        }
+
+            .star:hover,
+            .star.active {
+                color: #ffac42;
+            }
+
+        .user-photo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+            .user-photo img {
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+            }
+
+        .rating {
+            display: inline-block;
+        }
+
+            .rating input {
+                display: none;
+            }
+
+            .rating label {
+                float: right;
+                color: #aaa;
+            }
+
+                .rating label:before {
+                    content: "\2605";
+                    font-size: 2em;
+                }
+
+            .rating input:checked ~ label {
+                color: #e1ad01;
+            }
+    </style>
+   

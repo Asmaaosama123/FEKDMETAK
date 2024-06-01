@@ -1,0 +1,97 @@
+﻿/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Card Styles */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #008374;
+    color: #fff;
+    padding: 15px;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* User Photo Styles */
+.user-photo {
+    margin-bottom: 20px;
+}
+
+    .user-photo img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 3px solid #008374;
+    }
+
+/* User Details Styles */
+.user-details {
+    text-align: center;
+}
+
+    .user-details h4 {
+        margin: 0 0 10px 0;
+        font-size: 1.5rem;
+    }
+
+    .user-details p {
+        margin: 5px 0;
+        font-size: 1rem;
+        color: #555;
+    }
+
+/* Rating Styles */
+.fa-star {
+    color: #ffc107;
+    margin: 0 2px;
+}
+
+.pull-right {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+/* Button Styles */
+button.btn {
+    margin: 5px;
+}
+
+.btn-success {
+    background-color: #008374;
+    border-color: #008374;
+    color: #fff;
+    border: 10px;
+}
+
+    .btn-success:hover {
+        background-color: #008374;
+        border-color: #1e7e34;
+    }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .col-md-8 {
+        padding: 0;
+    }
+
+    .card {
+        margin: 10px;
+    }
+}

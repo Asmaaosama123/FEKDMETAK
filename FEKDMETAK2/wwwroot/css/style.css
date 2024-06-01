@@ -1,0 +1,34 @@
+﻿/* admin.css */
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th, .table td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Table header */
+    .table th {
+        background-color: #f2f2f2;
+    }
+
+    /* Table body */
+    .table td {
+        background-color: #ffffff;
+    }
+
+/* Link styling */
+a {
+    color: #ff69b4; /* Girly color for links */
+    text-decoration: none;
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+    a:hover {
+        color: #ff1493; /* Hover color for links */
+    }

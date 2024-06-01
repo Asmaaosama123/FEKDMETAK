@@ -1,0 +1,269 @@
+﻿@model FEKDMETAK.Models.User;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix today</title>
+    <link href="~/css/profile.css" rel="stylesheet" />
+    <link href="~/css/templatemo-style.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a363edd0e0.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <font-awesome-icon :icon="['far', 'arrow-up']" />
+    <FontAwesomeIcon icon="fa-duotone fa-arrow-up" />
+    <font-awesome-icon :icon="['fad', 'arrow-up']" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+</head>
+<body>
+    <div id="notification-container">
+        <i id="notification-symbol" class="fas fa-bell"></i>
+        <span id="notification-counter">
+            @if (ViewBag.matchingRowsCount != null)
+            {
+                @ViewBag.matchingRowsCount
+            }
+
+        </span>
+    </div>
+    <style>
+        #notification-container {
+            position: relative;
+        }
+
+        #notification-counter {
+            position: relative;
+            top: -56px;
+            right: -31px;
+            background-color: #f96f5996;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+    <div class=page>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <div class="text-center border-end">
+                                        @{
+                                            var base64 = Convert.ToBase64String(Model.Photo);
+                                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+
+                                        }
+                                        <img src="@imgsrc" style="max-width: 100px; max-height: 100px" />
+
+                                        @*   <img src="~/assets/img/team - copy/team-1.jpg" class="img-fluid avatar-xxl rounded-circle" alt=""> *@
+                                        <h4 class="text-primary font-size-20 mt-3 mb-2"> @Html.DisplayFor(model => model.FName)</h4>
+                                    </div>
+                                </div><!-- end col -->
+                                <div class="col-md-9">
+                                    <div class="ms-3">
+                                        <div>
+                                            <h4 class="card-title mb-2">ملفي الشخصي</h4>
+                                            @*                                     <p class="mb-0 text-muted">
+                                            Hi I'm Jansh,has been the industry's standard
+                                            dummy text To an English person alteration text.
+                                            </p> *@
+                                        </div>
+                                        <div class="row my-4">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <p class="text-muted mb-2 fw-medium">
+                                                        <i class="mdi mdi-email-outline me-2"></i>  @Html.DisplayFor(model => model.FName) @Html.DisplayFor(model => model.LName)
+
+                                                    </p>
+                                                    <p class="text-muted mb-2 fw-medium">
+                                                        <i class="mdi mdi-email-outline me-2"></i> @Html.DisplayFor(model => model.email)
+                                                    </p>
+                                                </div>
+                                            </div><!-- end col -->
+                                        </div><!-- end row --><!-- end li -->
+                                        <!-- end li -->
+                                        <!-- end li -->
+                                        </ul><!-- end ul -->
+                                    </div>
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+
+                </div><!-- end col -->
+
+                <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <h4 class="card-title mb-4"> بيانات الشخص</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td> @Html.DisplayFor(model => model.FName) @Html.DisplayFor(model => model.LName)</td>
+                                                <th scope="row">الاسم</th>
+                                                @*   <td> @Html.DisplayFor(model => model.FName) @Html.DisplayFor(model => model.LName)</td> *@
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(model => model.phone)
+                                                </td>
+                                                <th scope="row">الهاتف</th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    @ViewBag.SpecializationName
+                                                </td>
+                                                <th scope="row">التخصص</th>
+
+
+                                            </tr> <!-- end tr -->
+                                            <tr>
+                                                @*                                      <tr>
+                                                <th scope="row">المحافظة</th>
+                                                <td> @Html.DisplayFor(model => model.)  <td>
+                                                </tr> <!-- end tr -->*@
+                                            <tr>
+                                            <tr>
+                                                <td>
+                                                            @Html.DisplayFor(model => model.Town.City.Name)
+                                                </td>
+                                                <th scope="row">المحافظة</th>
+
+                                            </tr><!-- end tr -->
+                                            <tr>
+                                                <td>
+                                                            @Html.DisplayFor(model => model.Town.Name)
+                                                </td>
+                                                <th scope="row">المركز</th>
+
+                                            <tr>
+                                            <tr>
+                                                <td>
+                                                                    @Html.DisplayFor(model => model.Adderess)
+                                                </td>
+                                                <th scope="row">العنوان</th>
+
+                                            </tr><!-- end tr -->
+                                            <tr>
+                                                <td>
+                                                                    @Html.DisplayFor(model => model.Gender)
+                                                </td>
+                                                <th scope="row">النوع</th>
+
+                                            </tr> <!-- end tr -->
+                                            <tr>
+                                                <td>
+                                                                    @Html.DisplayFor(model => model.age)
+                                                </td>
+                                                <th scope="row">العمر</th>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                                    @Html.DisplayFor(model => model.email)
+                                                </td>
+                                                <th scope="row">البريد الالكتروني</th>
+
+                                            </tr>
+                                                            @if (ViewBag.total != null)
+                                                            {
+                                                <tr>
+                                                    <td>
+                                                        <span class="pull-right">
+                                                                            @{
+                                                                                if (ViewBag.total != null)
+                                                                                {
+                                                                                    int Rate = (int)Math.Round(ViewBag.total);
+                                                                                    for (int i = 0; i < Rate; i++)
+                                                                                    {
+                                                                        <i class="fa fa-star fa-2x" style="color: gold;"></i>
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                    <p>لم يتم تقييمك بعد</p>
+                                                                                }
+                                                                            }
+                                                        </span>
+                                                    </td>
+                                                    <th scope="row">التقييم </th>
+
+                                                </tr>
+                                                            }<!-- end tr --><!-- end tr -->
+                                        </tbody><!-- end tbody -->
+                                    </table><!-- end table -->
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end card-body -->
+            </div><!-- end card -->
+        </div>
+</body>
+
+<a href="@Url.Action("Edit", "User", new { id = @ViewBag.UserId })">Edit</a>
+</html>
+<hr />
+<script>
+    function onLogout() {
+        history.pushState({}, "", "/Login");
+    }
+    //    <script>
+    //        document.getElementById("notification-symbol").addEventListener("mouseover", function () {
+    //            var userId = @Model.Uid; // Assuming the user ID property is named "Uid"
+
+    //            // Redirect to the SentNotification view with the user ID
+    //            window.location.href = "/Notification/SentNotification/" + userId;
+    //        });
+    //</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("notification-symbol").addEventListener("click", function () {
+            var userId = @Model.Uid; // Assuming the user ID property is named "Uid"
+
+            // Redirect to the SentNotification action with the user ID
+
+            window.location.href = "/Notification/SentNotification?id=" + userId;
+        });
+    });
+
+</script>
+
+
+<script>
+    // Define the counter variable
+    var counter = 0;
+
+    // Function to update the notification counter value
+    function updateNotificationCounter(value) {
+        counter = @ViewBag.count;
+        var counterElement = document.getElementById('notification-counter');
+        counterElement.textContent = counter;
+    }
+
+    // Example usage: Update the counter value
+    updateNotificationCounter(@ViewBag.count); // Replace with the actual count retrieved from the server
+</script>
+<style>
+    #notification-symbol {
+        font-size: 40px; /* Adjust the size as needed */
+        color: #008374; /* Change to the desired color */
+    }
+</style>

@@ -1,0 +1,113 @@
+﻿/* Container for the notification section */
+.notification-container {
+    background-color: var(--color-primary);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Individual notification items */
+.notification-item {
+    background-color: #009282;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+    .notification-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .notification-item i {
+        font-size: 20px;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.2);
+        width: 44px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+
+    .notification-item h4 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .notification-item p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .notification-item:hover i {
+        background-color: #fff;
+        color: var(--color-primary);
+    }
+
+/* Form container */
+.notification-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+    .notification-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .notification-form input,
+    .notification-form select {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: none;
+        transition: border-color 0.3s;
+    }
+
+        .notification-form input:focus,
+        .notification-form select:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+
+    .notification-form button[type=submit] {
+        background-color: var(--color-primary);
+        color: #fff;
+        border: none;
+        padding: 14px 45px;
+        font-size: 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.4s;
+    }
+
+        .notification-form button[type=submit]:hover {
+            background-color: rgba(0, 131, 116, 0.8);
+        }
+
+.notification .text-danger {
+    color: #df1529;
+}
+
+.notification .alert {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.notification .alert-danger {
+    background-color: #df1529;
+    color: #fff;
+}

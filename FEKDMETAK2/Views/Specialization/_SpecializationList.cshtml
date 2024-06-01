@@ -1,0 +1,16 @@
+﻿@model IEnumerable<FEKDMETAK.Models.Specialization>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3">
+                <div class="specialization-name">
+                    <a href="@Url.Action("userbyspe","User" , new{ spe = item.Sid})">
+                        <h4>@item.SName</h4>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

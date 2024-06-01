@@ -1,0 +1,23 @@
+﻿@*@model List<FEKDMETAK.Models.Notification>
+
+@{
+    int counter = 0;
+}
+
+@foreach (var row in Model)
+{
+    counter++;
+    <p>SenderId: @row.RecieverId</p>
+    @if (row.IsAccepted)
+    {
+        <p>Your request is accepted</p>
+        <p>Contact him with his phone:</p>
+    }
+    else
+    {
+        <p>Your request is rejected</p>
+    }
+}
+
+<p>Counter: @counter</p>
+*@

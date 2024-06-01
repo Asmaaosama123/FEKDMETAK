@@ -1,0 +1,63 @@
+﻿/* Styles for the delete page of the user */
+
+/* Heading styles */
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+/* Details styles */
+dl {
+    margin-bottom: 2rem;
+}
+
+dt {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+dd {
+    font-size: initial;
+    margin-bottom: 1rem;
+}
+
+/* Delete button styles */
+input[type="submit"] {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    input[type="submit"]:hover {
+        background-color: #c82333;
+    }
+
+/* Back to list link styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: #0056b3;
+    }
+
+/* Image styles */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+}

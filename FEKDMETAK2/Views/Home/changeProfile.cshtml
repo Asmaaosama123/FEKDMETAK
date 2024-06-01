@@ -1,0 +1,24 @@
+﻿@model FEKDMETAK.Models.User
+
+<form asp-action="changeProfile">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Uid" />
+
+    <div class="form-group">
+        <label asp-for="FName" class="control-label"></label>
+        <input asp-for="FName" class="form-control" />
+        <span asp-validation-for="FName" class="text-danger"></span>
+    </div>
+
+    <!-- Add similar form fields for other properties like LName, email, phone, Address, age, TownId -->
+
+    <div class="form-group" asp-controller="Home" asp-action="profile">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

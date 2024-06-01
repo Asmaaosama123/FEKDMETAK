@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNetCore.Mvc.Razor
+@* @Model YourModelType *@
+@{
+    // ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" />
+
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-grid.rtl.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-grid.rtl.min.css" rel="stylesheet" />
+
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.min.css" rel="stylesheet" />
+
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-utilities.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.min.css" rel="stylesheet" />
+
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+</head>
+
+
+<body>
+    <section id="services" class="services sections-bg">
+
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-header">
+                <h2>تخصصاتنا</h2>
+                <p>التخصصات اللي وفرناهالك</p>
+            </div>
+
+            <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item  position-relative">
+                        <div class="icon">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <h3>دكاترة</h3>
+                        <p>هنوفرلك دكاترة في اغلب التخصصات تقدر تطلبهم في اي وقت و اي مكان</p>
+                        <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-broadcast"></i>
+                        </div>
+                        <h3>صيانة منزلية</h3>
+                        <p>تقدر تتواصل مع السباك او الكهربائي او اي خدمة منزلية</p>
+                        <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-easel"></i>
+                        </div>
+                        <h3>تعليم</h3>
+                        <p>بنوفرلك مدرسين لكل المراحل التعليمية</p>
+                        <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-bounding-box-circles"></i>
+                        </div>
+                        <h3>تنظيم حفلات</h3>
+                        <p>ممكن نوفرلك خدمة تنظيم الافراح و التصوير في المنزل و اي مكان تحتاجه</p>
+                        <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+        <div id="preloader"></div>
+
+        <!-- Vendor JS Files -->
+        <script src="~/assets/js/main.js"></script>
+        <script src="~/assets/vendor/aos/aos.cjs.js"></script>
+        <script src="~/assets/vendor/aos/aos.esm.js"></script>
+        <script src="~/assets/vendor/aos/aos.js"></script>
+        <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="~/assets/vendor/glightbox/js/glightbox.js"></script>
+        <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="~/assets/vendor/isotope-layout/isotope.pkgd.js"></script>
+        <script src="~/assets/vendor/php-email-form/validate.js"></script>
+        <script src="~/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+        <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.esm.min.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.esm.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="~/js/site.js"></script>
+</body>
+</html>

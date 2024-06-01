@@ -1,0 +1,38 @@
+﻿@model IEnumerable<FEKDMETAK.Models.Specialization>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layoutadmin.cshtml";
+}
+
+<link href="~/css/admin.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Sid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Sid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Sid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+﻿/* admin.css */
+/* Add your custom styles here */
+
+/* Optional: Add any common styles from admin.css */
+
+/* Details specific styles */
+h1 {
+    color: #333; /* Dark text color */
+    font-size: 24px; /* Adjust font size as needed */
+    margin-bottom: 20px; /* Add space below heading */
+}
+
+.row {
+    margin-bottom: 20px; /* Add space between elements */
+}
+
+.col-sm-2 {
+    font-weight: bold; /* Make labels bold */
+}
+
+.col-sm-10 {
+    margin-bottom: 10px; /* Add space below content */
+}
+
+a {
+    color: #ff69b4; /* Girly pink color */
+    text-decoration: none; /* Remove underline */
+}
+
+    a:hover {
+        text-decoration: underline; /* Add underline on hover */
+    }

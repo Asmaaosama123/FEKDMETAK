@@ -1,0 +1,133 @@
+﻿@model IEnumerable<FEKDMETAK.Models.Specialization>
+<head>
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+</head>
+@*<div class="sections-bg">
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3">
+                <div class="specialization-name">
+                    <a href="@Url.Action("userbyspe","User" , new{ spe = item.Sid})">
+                        <h4>@item.SName</h4>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>*@
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialization Search</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/css/templatemo-style.css">
+    <script src="https://kit.fontawesome.com/a363edd0e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <form class="d-flex tm-search-form" id="searchForm" onsubmit="return false;">
+        <input name="Search" id="searchInput" class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success tm-search-btn" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </form>
+    <div class="sections-bg">
+    <br />
+    <div class="container">
+        <div id="specializationList">
+            @Html.Partial("_SpecializationList", Model)
+        </div>
+    </div>
+</body>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        let debounceTimer;
+        $('#searchInput').on('input', function () {
+            clearTimeout(debounceTimer);
+            const searchValue = $(this).val();
+            debounceTimer = setTimeout(() => {
+                $.ajax({
+                    url: '@Url.Action("Specialization")',
+                    type: 'GET',
+                    data: { Search: searchValue },
+                    success: function (result) {
+                        $('#specializationList').html(result);
+                    }
+                });
+            }, 300); // Delay of 300ms
+        });
+    });
+</script>
+<style>
+    .sections-bg {
+        background-color: #f6f6f6;
+    }
+
+    .col-sm-3{
+        margin-top:40px;
+    }
+    
+   
+  
+    .specialization-name {
+      /*  padding: 32px;
+       ;
+        background-color: #f0f0f0;
+        border-radius: 15px;
+        box-shadow: 6px 5px 17px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        margin-bottom: 40px;
+        transition: all 0.3s ease;
+        width: 200px;
+        height:100px;*//* Set the initial width */
+        padding: 40px;
+        background: #fff;
+        height: 100%;
+        border-radius: 20px;
+     /*   margin-top:50px;*/
+/*        margin-bottom:25px;
+*/        margin-left:30px;
+        text-align: center;
+        transition-duration: 0.2s;
+        transition-timing-function: ease;
+        transition-delay: 0.2s;
+/*        border: 1px solid #987e5a;
+*/    }
+
+    .form-control {
+        margin-top: 20px;
+    }
+    button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled) {
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+        .specialization-name a {
+            text-decoration: none;
+            color: #333;
+            cursor:pointer;
+        }
+
+        .specialization-name:hover {
+/*            background-color: #e0e0e0;
+*/           box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    
+            /* Adjust box shadow on hover */
+        }
+
+            .specialization-name:hover a {
+                color:#987e5a;
+                ; /* Change color of specialization name on hover */
+            }
+
+
+</style>

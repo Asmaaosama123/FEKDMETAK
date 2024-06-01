@@ -1,0 +1,106 @@
+﻿
+
+header {
+    background-color: #ffffff; /* Background color */
+    border-bottom: 1px solid #e0e0e0; /* Border bottom */
+    padding: 10px 0; /* Padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+/* Navbar container */
+.container-fluid1 {
+    max-width: 1200px; /* Maximum width */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Navbar */
+.navbar2 {
+    display: flex; /* Flexbox */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Align items vertically */
+}
+
+/* Navbar links */
+.navbar4 {
+    list-style-type: none; /* Remove bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+    .navbar4 li {
+        display: inline-block; /* Display items horizontally */
+        margin-right: 20px; /* Margin between items */
+    }
+
+        .navbar4 li:last-child {
+            margin-right: 0; /* No margin for the last item */
+        }
+
+    .navbar4 .nav-link {
+        color: #333333; /* Link color */
+        font-weight: 500; /* Font weight */
+        transition: color 0.3s; /* Smooth color transition */
+    }
+
+        .navbar4 .nav-link:hover,
+        .navbar4 .nav-link:focus {
+            color: #007bff; /* Hover/focus color */
+            text-decoration: none; /* Remove underline */
+        }
+/* admin.css */
+
+/* Header */
+header {
+    background-image: url('path/to/your/photo.jpg'); /* Background image */
+    background-size: cover; /* Cover the entire header */
+    background-position: center; /* Center the background image */
+    border-bottom: 1px solid #e0e0e0; /* Border bottom */
+    padding: 10px 0; /* Padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+/* Navbar container */
+.container-fluid1 {
+    max-width: 1200px; /* Maximum width */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Navbar */
+.navbar2 {
+    display: flex; /* Flexbox */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Align items vertically */
+}
+
+/* Navbar links */
+.navbar4 {
+    list-style-type: none; /* Remove bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+    .navbar4 li {
+        display: inline-block; /* Display items horizontally */
+        margin-right: 20px; /* Margin between items */
+    }
+
+        .navbar4 li:last-child {
+            margin-right: 0; /* No margin for the last item */
+        }
+
+    .navbar4 .nav-link {
+        color:cadetblue ;
+         /* Link color */
+        font-weight: 500; /* Font weight */
+        transition: color 0.3s; /* Smooth color transition */
+        text-decoration: none; /* Remove underline */
+        opacity:1;
+        font-size:larger;
+        font-family:sans-serif;
+    }
+
+        .navbar4 .nav-link:hover,
+        .navbar4 .nav-link:focus {
+            color: gray; /* Hover/focus color */
+        }
+

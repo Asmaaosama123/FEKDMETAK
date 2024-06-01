@@ -1,0 +1,138 @@
+﻿
+    @using FEKDMETAK.Models;
+    @model User
+    @using Microsoft.AspNetCore.Mvc
+    @using System.Xml.Linq;
+    @using Newtonsoft.Json;
+
+    @{
+        ViewData["Title"] = "Edit";
+        // Layout = "~/Views/Shared/Layoutadmin.cshtml";
+    }
+
+    <link href="~/css/admin.css" rel="stylesheet" />
+    <link href="~/css/edit.css" rel="stylesheet" />
+
+    <link href="~/css/style.css" rel="stylesheet" />
+    <h1>Edit</h1>
+
+    <h4>User</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Uid" />
+                @* <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control"></select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+                </div> *@
+                <div class="form-group">
+                    <label asp-for="FName" class="control-label"></label>
+                    <input asp-for="FName" class="form-control" />
+                    <span asp-validation-for="FName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LName" class="control-label"></label>
+                    <input asp-for="LName" class="form-control" />
+                    <span asp-validation-for="LName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="email" class="control-label"></label>
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="phone" class="control-label"></label>
+                    <input asp-for="phone" class="form-control" />
+                    <span asp-validation-for="phone" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Adderess" class="control-label"></label>
+                    <input asp-for="Adderess" class="form-control" />
+                    <span asp-validation-for="Adderess" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TownId" class="control-label"></label>
+                    <input asp-for="TownId" class="form-control" />
+                    <span asp-validation-for="TownId" class="text-danger"></span>
+                </div>
+                @*  <div class="input_box">
+                @Html.LabelFor(model => model.specializationId, "Specialization", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("specializationId", (SelectList)ViewBag.Specilizations, "Select Specialization", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.specializationId, "", new { @class = "text-danger" })
+                </div> *@
+
+                @* <div class="input_box">
+                @Html.LabelFor(model => model.TownId, "CityId")
+                @Html.DropDownListFor(model => model.TownId, new SelectList(ViewBag.Cities, "Id", "Name"), "Select City", new { @class = "form-control", id = "cityDropdown" })
+                @Html.ValidationMessageFor(model => model.TownId, "", new { @class = "text-danger" })
+                </div> *@
+                @*             @Html.DropDownListFor(model => model.Gender, new SelectList(Enum.GetValues(typeof(Gender))),"النوع", new { @class = "dropdown-style" })
+                *@
+                @*  <div class="form-group">
+                <label asp-for="specializationId" class="control-label"></label>
+                <input asp-for="specializationId" class="form-control" />
+                <span asp-validation-for="specializationId" class="text-danger"></span>
+                </div> *@
+                <div class="form-group">
+                    <label asp-for="age" class="control-label"></label>
+                    <input asp-for="age" class="form-control" />
+                    <span asp-validation-for="age" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="password" class="control-label"></label>
+                    <input asp-for="password" class="form-control" type="password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#cityDropdown').change(function () {
+                var selectedCityId = $(this).val();
+                $('#townDropdown').empty().append('<option value="">Select Town</option>').prop('disabled', true); // Clear and disable the town dropdown list
+
+                // Filter the towns based on the selected city
+                var townsList = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Towns, Formatting.None,
+                    new JsonSerializerSettings()
+                    {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    }));
+                var filteredTowns = townsList.filter(function (town) {
+                    return town.CityId == selectedCityId;
+                });
+
+                // Add the filtered towns to the dropdown list
+                $.each(filteredTowns, function (index, town) {
+                    $('#townDropdown').append($('<option>', {
+                        value: town.Id,
+                        text: town.Name
+                    }));
+                });
+
+                // If there are towns for the selected city, enable the town dropdown
+                if (filteredTowns.length > 0) {
+                    $('#townDropdown').prop('disabled', false);
+                }
+            });
+        });
+    </script>
+    {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

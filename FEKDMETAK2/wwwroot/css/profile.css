@@ -1,0 +1,123 @@
+﻿/* Main container */
+.container {
+    margin-top: 30px;
+}
+
+/* Profile card */
+.card {
+    margin-bottom: 30px;
+    border-radius: 10px;
+    margin-top: 16px;
+    margin-bottom: 2px;
+    margin-right: 16px;
+    margin-left: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Profile image */
+.avatar-xxl {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.border-end {
+    border-right: 1px solid #ddd;
+}
+
+/* Profile name and title */
+.text-primary {
+    color: #007bff !important;
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.font-size-13 {
+    font-size: 13px;
+}
+
+/* Biography section */
+.card-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Personal details and skills */
+table.table-bordered {
+    margin-bottom: 0;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.badge-soft-secondary {
+    background-color: #e2e3e5;
+    color: #6c757d;
+}
+
+    .badge-soft-secondary.p-2 {
+        padding: 0.5rem 0.75rem;
+    }
+
+/* Work experience */
+.work-item {
+    margin-bottom: 15px;
+}
+
+    .work-item h6 {
+        font-weight: bold;
+    }
+
+    .work-item p {
+        margin-bottom: 5px;
+    }
+
+/* Custom styles for nav tabs */
+.nav-tabs-custom .nav-link {
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+    .nav-tabs-custom .nav-link.active {
+        color: #495057;
+        background-color: #fff;
+        border-color: #dee2e6 #dee2e6 #fff;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .border-end {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .ms-3 {
+        margin-top: 20px;
+    }
+
+    .nav-tabs-custom .nav-link {
+        padding: 8px 12px;
+    }
+
+    .badge-soft-secondary {
+        margin-bottom: 5px;
+    }
+}

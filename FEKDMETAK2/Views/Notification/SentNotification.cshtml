@@ -1,0 +1,201 @@
+﻿@model List<FEKDMETAK.Models.Notification>
+@using FEKDMETAK.Models;
+
+@if (ViewBag.num == 0)
+{
+    int count = 0;
+    @foreach (var row in Model)
+    {
+        count++;
+        var base64 = Convert.ToBase64String(row.Sender.Photo);
+        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+        @*         <img src="@imgsrc" style="max-width: 100px; max-height: 100px" />
+ *@        <div class="notification-item">
+            <img src="@imgsrc" style="max-width: 100px; max-height: 100px;border-radius: 50%" />
+            <p><strong> لقد أرسل إليك</strong> @(row.Sender != null ? $"{row.Sender.FName} {row.Sender.LName}" : "Unknown Sender")</p>
+
+            <p><strong>تفاصيل عملية الحجز:</strong>
+
+            <p> @row.Message</p>
+            <p>
+                <strong>الساعة:</strong>
+            </p>
+            <p> @row.Clock @row.AmPm</p>
+            <p> <strong>التاريخ</strong></p>
+            <p> @row.Date</p>
+
+            <button type="button" class="btn btn-success" onclick="handleAction('@row.NOId', 'Accept', this.id)" id="AcceptButton_@row.NOId">Accept</button>
+            <button type="button" class="btn btn-danger" onclick="handleAction('@row.NOId', 'Reject', this.id)" id="RejectButton_@row.NOId">Reject</button>
+        </div>
+    }
+    TempData["notificationCount"] = count;
+}
+else
+{
+    @foreach (var row in Model)
+    {
+        var base64 = Convert.ToBase64String(row.Reciever.Photo);
+        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+        //  <img src="@imgsrc" style="max-width: 100px; max-height: 100px" />
+        <div class="notification-item">
+
+
+            <img src="@imgsrc" style="max-width: 100px; max-height: 100px;border-radius: 50%" />
+
+
+
+            @if (row.IsAccepted)
+            {
+
+                <p>
+                    <strong>
+                        قام                <a href="@Url.Action("UserProfile", "Specialization", new { uid = row.RecieverId })" style="color:white">  <p>@(row.Reciever != null ? $"{row.Reciever.FName} {row.Reciever.LName}" : "Unknown Sender")</p></a>
+                        بقبول طلبك يمكنك التواصل معه من خلال رقم الهاتف
+                    </strong>
+                </p>
+                <p>رقم التليفون:  @row.Reciever.phone</p>
+            }
+            else
+            {
+
+                <p>قام  <p>@(row.Reciever != null ? $"{row.Reciever.FName} {row.Reciever.LName}" : "Unknown Sender")</p>برفض طلبك</p>
+                <a href="@Url.Action("Specialization", "Specialization")">يمكنك التواصل مع موظف آخر</a>
+            }
+        </div>
+    }
+}
+<style>
+    /* Container for the notifications */
+    .notification-container {
+        background-color: var(--color-primary);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+
+    /* Individual notification item */
+    .notification-item {
+        background-color: #19875487;
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 20px;
+        color: ##212529;
+        display: flex;
+        flex-direction: column;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        margin-top: 50px;
+        width: 700px;
+    }
+
+        /* Notification text styles */
+        .notification-item p {
+            margin: 5px 0;
+        }
+
+        .notification-item strong {
+            font-weight: 600;
+        }
+
+        /* Button styles */
+        .notification-item .btn {
+            margin-right: 10px;
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, opacity 0.3s;
+        }
+
+        .notification-item .btn-success {
+            background-color: transparent;
+            border: none;
+        }
+
+        .notification-item .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .notification-item .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        /* Button hover effect */
+        .notification-item .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Disabled button effect */
+        .notification-item .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* Hover effect for the notification item */
+        .notification-item:hover {
+            background-color: #009282;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .notification-item .btn {
+            margin-top: 5px;
+            margin-right: auto;
+            margin-left: auto;
+            display: block; /* Ensure the button takes full width */
+            width: fit-content; /* Adjust width based on content */
+            text-align: center;
+        }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+        a.hover {
+            color: #fff;
+            cursor: pointer;
+        }
+
+    }</style>
+
+<script>
+    function handleAction(notificationId, action, buttonId) {
+        const requestBody = {
+            notificationId: notificationId,
+            action: action,
+            buttonId: buttonId
+        };
+
+        const oppositeButtonId = (action === 'Accept') ? buttonId.replace('AcceptButton_', 'RejectButton_') : buttonId.replace('RejectButton_', 'AcceptButton_');
+        document.getElementById(oppositeButtonId).disabled = true;
+
+        fetch('/Notification/isaccept', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Notification updated successfully');
+                } else {
+                    console.error('Error updating notification');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating notification:', error);
+            });
+    }
+
+    function navigateToProfile(id) {
+        var targetUrl = '/Specialization/UserProfile/' + id;
+        window.location.href = targetUrl;
+    }
+</script>

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<FEKDMETAK.Models.User>
+
+<style>
+    .user-box {
+       /* border: 1px solid #ccc;
+        border-radius: 15px;
+        box-shadow: 2px 6px 9px 0px rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        margin-bottom: 10px;
+        margin-top:40px;
+        display: flex;
+        flex-direction: column;*/
+        text-align: center;
+        background: #fff;
+        border-radius: 28px;
+        padding: 16px;
+        overflow: hidden;
+        box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+        margin-top: 60px;
+        margin-left:15px;
+    }
+
+    .user-photo {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .user-photo img {
+           border-radius: 50%;
+            width: 150px;
+            height:150px;
+            overflow: hidden;
+        }
+
+    .user-details {
+        text-align: center;
+    }
+
+        .user-details h4,
+        .user-details p {
+            margin: 5px 0;
+        }
+        a{
+            color:#198754;
+            text-decoration:none;
+        }
+
+    a:hover {
+            color: black;
+    }
+</style>
+
+<table class="table">
+    <tbody>
+        <div class="container">
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    @if (item.specializationId != null)
+                    {
+                        <div class="col-sm-3">
+                            <a href="@Url.Action("UserProfile", "Specialization", new { uid = item.Uid })">
+                                @{
+                                    var base64 = Convert.ToBase64String(item.Photo);
+                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                }
+
+                                <div class="user-box">
+                                    <div class="user-photo">
+                                        <img src="@imgsrc" />
+                                    </div>
+                                    <div class="user-details">
+                                        <h4>@Html.DisplayFor(modelItem => item.FName) @Html.DisplayFor(modelItem => item.LName)</h4>
+                                        <p>@Html.DisplayFor(modelItem => item.email)</p>
+                                       @* <p>@Html.DisplayFor(modelItem => item.RecievedReview)</p>*@
+                                      @*  <p>التخصص: @Html.DisplayFor(modelItem => item.specializationId)</p>*@
+                                        @*<p>العمر: @Html.DisplayFor(modelItem => item.age)</p>
+                                        <p>النوع: @Html.DisplayFor(modelItem => item.Gender)</p>*@
+                                        <!-- Add other properties as needed -->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </tbody>
+</table>
+

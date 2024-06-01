@@ -1,0 +1,161 @@
+﻿@using FEKDMETAK.Models;
+@using Newtonsoft.Json;
+@model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/register(1).css" rel="stylesheet" />
+    <link href="~/css/Register.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="signup">
+            <form asp-controller="Home" asp-action="Register" enctype="multipart/form-data" method="post" class="registerform">
+                <h2>تسجيل حساب</h2>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="input_box">
+                    <input asp-for="FName" placeholder="الاسم الاول" />
+                    <span asp-validation-for="FName"></span>
+                </div>
+                <div class="input_box">
+                    <input asp-for="LName" placeholder="الاسم الثاني" />
+                    <span asp-validation-for="LName"></span>
+                </div>
+                <div class="input_box">
+                    <input asp-for="age" type="text" placeholder="العمر" />
+                    <span asp-validation-for="age"></span>
+                </div>
+
+                @Html.DropDownListFor(model => model.Gender, new SelectList(Enum.GetValues(typeof(Gender))), "النوع", new { @class = "form-control" })
+
+                <div class="input_box">
+                    <input asp-for="email" placeholder="البريد الاليكتروني" />
+                    <span asp-validation-for="email"></span>
+                </div>
+
+                <hr2>@ViewBag.error</hr2>
+
+                <div class="input_box">
+                    <input asp-for="password" type="password" placeholder="الرقم السري" />
+                    <span asp-validation-for="password"></span>
+                </div>
+
+                <div class="input_box">
+                    <input asp-for="ConfirmPassword" type="password" placeholder="تأكيد الرقم السري" />
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <div class="input_box">
+                    @Html.DropDownList("CityId", (SelectList)ViewBag.Cities, "اختر محافظتك", new { @class = "form-control", id = "cityDropdown" })
+                    @Html.ValidationMessage("CityId")
+                </div>
+
+                <div class="input_box">
+                    <select asp-for="TownId" class="form-control" id="townDropdown" disabled>
+                        <option value="">اختر مركزك</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.TownId)
+                </div>
+
+                @if (Model.Type != UserType.ادمن)
+                {
+@*                    @Html.DropDownListFor(model => model.Type, new SelectList(Enum.GetValues(typeof(UserType))), "تسجيل كـ", new { @class = "form-control" })
+*@
+                    var userTypes = Enum.GetValues(typeof(UserType))
+                    .Cast<UserType>()
+                    .Where(t => t != UserType.ادمن);
+
+                    @Html.DropDownListFor(model => model.Type, new SelectList(userTypes), "تسجيل كـ", new { @class = "form-control" })
+                }
+
+                <div class="input_box">
+                    @Html.DropDownList("specializationId", (SelectList)ViewBag.Specilizations, "اختر تخصصك", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.specializationId)
+                </div>
+              
+
+
+
+                <div class="input_box">
+                    <input asp-for="Adderess" placeholder="العنوان" />
+                    <span asp-validation-for="Adderess"></span>
+                </div>
+
+                <div class="input_box">
+                    <input asp-for="phone" placeholder="رقم تليفونك" maxlength="11" />
+                    <span asp-validation-for="phone"></span>
+                </div>
+
+                <label for="profile-picture" class="upload-icon">
+                    <i id="icon" class="fa-solid fa-user"></i>
+                </label>
+                <input type="file" asp-for="clientFile" id="profile-picture" onchange="validateFile(this)" accept="image/*" style="display:none;" />
+                <img id="myImg" />
+                <span asp-validation-for="clientFile"></span>
+
+                @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["ErrorMessage"]
+                    </div>
+                }
+
+                <button type="submit">تسجيل</button>
+            </form>
+        </div>
+    </div>
+ 
+    <script>
+        function validateFile(input) {
+            var file = input.files[0];
+            var fileName = file.name;
+            var fileExtension = fileName.split('.').pop().toLowerCase();
+            var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+            if (allowedExtensions.indexOf(fileExtension) === -1) {
+                var errorMessage = "Invalid format. Please upload a .jpg, .jpeg, .png, or .gif image.";
+                var errorElement = document.querySelector("[data-valmsg-for='clientFile']");
+                errorElement.textContent = errorMessage;
+                input.value = "";
+                return false;
+            } else {
+                var errorElement = document.querySelector("[data-valmsg-for='clientFile']");
+                errorElement.textContent = "";
+                return true;
+            }
+        }
+
+        $(function () {
+            $('#cityDropdown').change(function () {
+                var selectedCityId = $(this).val();
+                $('#townDropdown').empty().append('<option value="">اختر مركزك</option>').prop('disabled', true);
+
+                var townsList = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Towns));
+                var filteredTowns = townsList.filter(function (town) {
+                    return town.CityId == selectedCityId;
+                });
+
+                $.each(filteredTowns, function (index, town) {
+                    $('#townDropdown').append($('<option>', {
+                        value: town.Id,
+                        text: town.Name
+                    }));
+                });
+
+                if (filteredTowns.length > 0) {
+                    $('#townDropdown').prop('disabled', false);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

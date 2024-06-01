@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"] - My Application</title>
+    <!-- Your common meta tags, stylesheets, and scripts -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Fe 7dmtak</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMU6P4rFTO/wu7sfs6pp3B7wzySA5QUR9o23Kf7" crossorigin="anonymous">
+    <environment include="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- ======= Header ======= -->
+    <section id="topbar" class="topbar d-flex align-items-center">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Fe 7'dmtak@gmail.com</a></i>
+                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+            </div>
+            <div class="social-links d-none d-md-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </section> <!-- End Top Bar -->
+
+    <header id="header" class="header d-flex align-items-center">
+
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <h1>Fe 7'dmtak<span>.</span></h1>
+            </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li class="navbar">
+                        <a class="navbar" asp-area="." asp-controller="front" asp-action="index">الصفحة الرئيسية</a>
+                    </li>
+                    <li class="navbar">
+                        <a class="navbar" asp-area="" asp-controller="front" asp-action="about">عننا</a>
+                    </li>
+                    <li class="navbar">
+                        <a class="navbar" asp-area="" asp-controller="front" asp-action="contact">تواصل معنا</a>
+                    </li>
+                    <li class="navbar">
+                        <a class="navbar" asp-area="" asp-controller="front" asp-action="team">فريق العمل</a>
+                    </li>
+                   @* <li class="navbar">
+                        <a class="navbar" asp-area="" asp-controller="front" asp-action="service">الخدمات</a>
+                    </li>*@
+                    <li class="navbar">
+                        <a class="navbar" asp-area="" asp-controller="Specialization" asp-action="specialization">التخصصات</a>
+                    </li>
+                    <li class="navbar">
+                        <a class="navbar" asp-area="" asp-controller="Home" asp-action="Register">تسجيل حساب</a>
+                    </li>
+                    
+                   
+ @if (Context.Session.GetString("email") == null)
+ {
+                        <li class="navbar">
+                            <a class="navbar" asp-area="" asp-controller="Home" asp-action="Login">تسجيل دخول</a>
+                        </li>
+ }
+ else{
+ <li class="nav-item">
+         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">تسجيل خروج</a>
+ </li>
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("email")))
+                        {
+                            <li class="navbar">
+                                <a class="navbar" asp-area="" asp-controller="Home" asp-action="Profile">
+                                    <i class="fa-solid fa-user"></i> <!-- Replace this with your desired icon -->
+                                </a>
+                            </li>
+                        }
+ }
+                </ul>
+            </nav>
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+        </div>
+    </header><!-- End Header -->
+    <!-- End Header -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer id="footer" class="footer">
+
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-5 col-md-12 footer-info">
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <span>Fe 7'dmtak</span>
+                    </a>
+                    <p>في خدمتك وفرلك كل الخدمات اللي ممكن تحتاجها تقدر تطلبها في اي وقت و اي مكان</p>
+                    <div class="social-links d-flex mt-4">
+
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>روابطنا</h4>
+                    <ul>
+                        <li class="navbar">
+                            <a class="navbar" asp-area="." asp-controller="front" asp-action="index">الصفحة الرئيسية</a>
+                        </li>
+                        <li class="navbar">
+                            <a class="navbar" asp-area="" asp-controller="front" asp-action="about">عننا</a>
+                        </li>
+                        <li class="navbar">
+                            <a class="navbar" asp-area="" asp-controller="front" asp-action="contact">تواصل معنا</a>
+                        </li>
+                        <li class="navbar">
+                            <a class="navbar" asp-area="" asp-controller="front" asp-action="team">فريق العمل</a>
+                        </li>
+            
+                      
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+                    <h4>تواصل معانا</h4>
+                    <strong>Phone:</strong> +1 5589 55488 55<br>
+                    <strong>Email:</strong> Fe 7'dmtak13@gmail.com<br>
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Fe 7'dmtak</span></strong>. All Rights Reserved
+
+            </div>
+
+    </footer>
+
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    @*<div id="preloader"></div> *@
+    @* <div id="preloader"></div> *@
+
+    <!-- Vendor JS Files -->
+
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.esm.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.esm.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/vendor/glightbox/js/glightbox.js"></script>
+    <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/assets/vendor/isotope-layout/isotope.pkgd.js"></script>
+    <script src="~/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <!-- Template Main JS File -->
+    <script src="~/assets/js/main.js"></script>
+
+</body>
+</html>
